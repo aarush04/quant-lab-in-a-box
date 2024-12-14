@@ -6,19 +6,40 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/aarush04/quant-lab-in-a-box.git'
             }
         }
+        stage('Debug Python Environment') {
+            steps {
+                sh '''
+                echo "Python version:"
+                python3 --version
+                echo "Python location:"
+                which python3
+                echo "Pip version:"
+                python3 -m pip --version
+                '''
+            }
+        }
         stage('Install Dependencies') {
             steps {
-                sh 'python3 -m pip install -r requirements.txt'
+                sh '''
+                # Use explicit path to the correct Python binary
+                /Library/Frameworks/Python.framework/Versions/3.12/bin/python3 -m pip install -r requirements.txt
+                '''
             }
         }
         stage('Run Tests') {
             steps {
-                sh 'pytest tests/'
+                sh '''
+                # Use explicit path to pytest
+                /Library/Frameworks/Python.framework/Versions/3.12/bin/python3 -m pytest tests/
+                '''
             }
         }
         stage('Run Backtesting') {
             steps {
-                sh 'python3 backtesting/backtest.py'
+                sh '''
+                # Use explicit path to run backtesting script
+                /Library/Frameworks/Python.framework/Versions/3.12/bin/python3 backtesting/backtest.py
+                '''
             }
         }
     }
