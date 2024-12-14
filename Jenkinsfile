@@ -6,18 +6,6 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/aarush04/quant-lab-in-a-box.git'
             }
         }
-        stage('Debug Python Environment') {
-            steps {
-                sh '''
-                echo "Python version:"
-                python3 --version
-                echo "Python location:"
-                which python3
-                echo "Pip version:"
-                python3 -m pip --version
-                '''
-            }
-        }
         stage('Install Dependencies') {
             steps {
                 sh '''
