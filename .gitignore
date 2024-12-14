@@ -1,0 +1,14 @@
+
+# Python-specific
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# VS Code-specific
+.vscode/
+.DS_Store
+
+# Jenkins-specific
+.jenkins
+
